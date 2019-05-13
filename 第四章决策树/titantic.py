@@ -16,20 +16,19 @@ X['Age'].fillna(X['Age'].mean(),inplace=True)   #age只有633个，需补充，�
 test_x['Age'].fillna(test_x['Age'].mean(),inplace=True)
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state=33)  # 将数据进行分割
 
-vec = DictVectorizer(sparse=False)
+vec = DictVectorizer(sparse=False)#不产生稀疏矩阵
 X_train = vec.fit_transform(X_train.to_dict(orient='record'))   #对训练数据的特征进行提取
 X_test = vec.transform(X_test.to_dict(orient='record'))         #对测试数据的特征进行提取
 predict_x = vec.transform(test_x.to_dict(orient='record'))
-#转换特征后，凡是类别型型的特征都单独独成剥离出来，独成一列特征，数值型的则不变
-print (vec.feature_names_)   #['age', 'pclass=1st', 'pclass=2nd', 'pclass=3rd', 'sex=female', 'sex=male']
+# #转换特征后，凡是类别型型的特征都单独独成剥离出来，独成一列特征，数值型的则不变
+# print (vec.feature_names_)   #['age', 'sex=female', 'sex=male']
+# #3.使用决策树对测试数据进行类别预测
+# dtc = DecisionTreeClassifier()
+# dtc.fit(X_train,y_train)
+# y_predict = dtc.predict(predict_x)
+# y_predict = y_predict.astype('int')
+# #4.获取结果报告
+# print ('Accracy:',dtc.score(X_test,y_test))
 
-#3.使用决策树对测试数据进行类别预测
-dtc = DecisionTreeClassifier()
-dtc.fit(X_train,y_train)
-y_predict = dtc.predict(predict_x)
-y_predict = y_predict.astype('int')
-#4.获取结果报告
-print ('Accracy:',dtc.score(X_test,y_test))
-
-predic_result = pd.DataFrame({'PassengerId':test_data['PassengerId'],'Survived':y_predict})
-predic_result.to_csv('submission.csv',index=False)
+# predic_result = pd.DataFrame({'PassengerId':test_data['PassengerId'],'Survived':y_predict})
+# predic_result.to_csv('submission.csv',index=False)
