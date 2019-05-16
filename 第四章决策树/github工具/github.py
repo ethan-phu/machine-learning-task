@@ -22,7 +22,7 @@ def confirm(question):
         if reply[:1] == 'n':
             return False
 if __name__ == '__main__':
-    token = input('please input you token,if not,creat first!\n token: ')
+    token = "d2e4a44803fa0b57173cf4f06d4417123a2b15ed"
     username = "phunsuke"
     headers = {'User-Agent':'Mozilla/5.0',
                'Authorization': 'token {}'.format(token),
